@@ -1,182 +1,423 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portfolio Snapshot | Garrett Shaw</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #BA0C2F;
-            --secondary-color: #F8F8F8;
-            --accent-color: #54585A;
-            --white-color: #FFFFFF;
-            --supporting-green: #BAD57E;
-            --supporting-blue: #0079A7;
-            --supporting-yellow: #FDDE69;
-            --school-name: "BALL STATE UNIVERSITY";
-        }
-        body { font-family: 'Inter', sans-serif; background-color: var(--secondary-color); }
-        .sidebar { width: 280px; min-width: 280px; background-color: var(--white-color); box-shadow: 2px 0 5px rgba(0,0,0,0.05); }
-        .nav-link { transition: all 0.2s; cursor: pointer; border-radius: 0.5rem; border-left: 4px solid transparent; }
-        .nav-link:hover { background-color: #F3F4F6; }
-        .nav-link.active { background-color: #F3F4F6; border-left: 4px solid var(--primary-color); font-weight: 600; }
-        .section-content { scroll-margin-top: 20px; }
-        .stat-card { background-color: var(--white-color); border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); }
-        .btn-primary { background-color: var(--primary-color); transition: background-color 0.2s, transform 0.1s; }
-        .btn-primary:hover { filter: brightness(1.1); }
-        .btn-filter.active { background-color: var(--primary-color); color: var(--white-color); }
-        .chart-container { position: relative; width: 100%; max-width: 300px; height: 300px; margin: auto; }
-        @media (max-width: 1024px) { .sidebar { width: 100%; min-width: 100%; height: auto; position: static; box-shadow: none; } }
-        .text-project-highlight { color: var(--primary-color); font-weight: 700; }
-        main strong { font-weight: 700; color: var(--accent-color); }
-    </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portfolio Snapshot | Garrett Shaw</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary-color: #BA0C2F;
+    --secondary-color: #F8F8F8;
+    --accent-color: #54585A;
+    --white-color: #FFFFFF;
+    --supporting-green: #BAD57E;
+    --supporting-blue: #0079A7;
+    --supporting-yellow: #FDDE69;
+    --school-name: "BALL STATE UNIVERSITY";
+}
+body { font-family: 'Inter', sans-serif; background-color: var(--secondary-color); }
+.sidebar { width: 280px; min-width: 280px; background-color: var(--white-color); box-shadow: 2px 0 5px rgba(0,0,0,0.05); }
+.nav-link { transition: all 0.2s; cursor: pointer; border-radius: 0.5rem; border-left: 4px solid transparent; }
+.nav-link:hover { background-color: #F3F4F6; }
+.nav-link.active { background-color: #F3F4F6; border-left: 4px solid var(--primary-color); font-weight: 600; }
+.section-content { scroll-margin-top: 20px; }
+.stat-card { background-color: var(--white-color); border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); }
+.btn-primary { background-color: var(--primary-color); transition: background-color 0.2s, transform 0.1s; }
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-filter.active { background-color: var(--primary-color); color: var(--white-color); }
+.chart-container { position: relative; width: 100%; max-width: 300px; height: 300px; margin: auto; }
+@media (max-width: 1024px) { .sidebar { width: 100%; min-width: 100%; height: auto; position: static; box-shadow: none; } }
+.text-project-highlight { color: var(--primary-color); font-weight: 700; }
+main strong { font-weight: 700; color: var(--accent-color); }
+</style>
 </head>
 <body class="flex flex-col lg:flex-row min-h-screen text-gray-800">
-    <nav class="sidebar p-6 sticky top-0 h-auto lg:h-screen z-10">
-        <div class="mb-6 pb-4 border-b border-gray-200">
-            <div class="flex items-center mb-3">
-                <img id="nav-logo" class="h-10 w-10 mr-3 inline-block align-middle rounded-lg" src="https://placehold.co/40x40/BA0C2F/FFFFFF.png?text=BSU" alt="School Logo">
-                <p id="nav-school" class="text-xs font-semibold uppercase text-gray-500" style="color: var(--primary-color);">BALL STATE UNIVERSITY</p>
-            </div>
-            <h1 id="nav-name" class="text-xl font-bold text-gray-900 mt-1">Garrett Shaw</h1>
-            <p id="nav-title" class="text-sm text-gray-600 italic">Innovative Mind, Results-Oriented</p>
+
+<!-- Sidebar -->
+<nav class="sidebar p-6 sticky top-0 h-auto lg:h-screen z-10">
+  <div class="mb-6 pb-4 border-b border-gray-200">
+    <div class="flex items-center mb-3">
+      <img id="nav-logo" class="h-10 w-10 mr-3 inline-block align-middle rounded-lg" alt="School Logo">
+      <p id="nav-school" class="text-xs font-semibold uppercase text-gray-500" style="color: var(--primary-color);">BALL STATE UNIVERSITY</p>
+    </div>
+    <h1 id="nav-name" class="text-xl font-bold text-gray-900 mt-1">Garrett Shaw</h1>
+    <p id="nav-title" class="text-sm text-gray-600 italic">Future-Focused Problem Solver</p>
+  </div>
+
+  <div id="nav-links" class="flex flex-col space-y-2">
+    <a class="nav-link p-3 text-sm active" onclick="scrollToSection('student-introduction')">👤 About Me & Mission</a>
+    <a class="nav-link p-3 text-sm" onclick="scrollToSection('snapshot-dashboard')">🚀 Snapshot & Impact</a>
+    <a class="nav-link p-3 text-sm" onclick="scrollToSection('academic-foundation')">🧠 Academic Foundation</a>
+    <a class="nav-link p-3 text-sm" onclick="scrollToSection('project-showcase')">💡 Project Outcomes</a>
+    <a class="nav-link p-3 text-sm" onclick="scrollToSection('recognition-experience')">🏆 Experience & Recognition</a>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<main class="main-content flex-grow p-4 md:p-10 lg:p-12 space-y-12 overflow-y-auto">
+
+  <!-- Introduction -->
+  <section id="student-introduction" class="section-content max-w-6xl mx-auto space-y-6">
+    <h2 class="text-3xl font-extrabold text-gray-900 border-b pb-2">Introduction & Personal Mission</h2>
+    <div id="introduction-content" class="stat-card p-6 grid grid-cols-1 md:grid-cols-4 gap-6 items-start"></div>
+  </section>
+
+  <!-- Snapshot Dashboard -->
+  <section id="snapshot-dashboard" class="section-content max-w-6xl mx-auto space-y-6">
+    <h2 class="text-3xl font-extrabold text-gray-900 border-b pb-2">Snapshot & Impact</h2>
+    <p class="text-gray-600">Quick, data-driven summary of my current status and engagement.</p>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="stat-card p-5">
+        <p class="text-sm font-medium text-gray-500">Current Status</p>
+        <p id="stat-year" class="text-3xl font-bold mt-1" style="color: var(--primary-color);"></p>
+        <p id="stat-major" class="text-sm text-gray-500 mt-1"></p>
+      </div>
+      <div class="stat-card p-5">
+        <p class="text-sm font-medium text-gray-500">Calculated Impact Score</p>
+        <p id="stat-impact" class="text-3xl font-bold mt-1" style="color: var(--supporting-green);"></p>
+        <p class="text-sm text-gray-500 mt-1">Reflects engagement across all key areas.</p>
+      </div>
+      <div class="stat-card p-5">
+        <p class="text-sm font-medium text-gray-500">Total Projects Documented</p>
+        <p id="stat-projects" class="text-3xl font-bold mt-1" style="color: var(--supporting-blue);"></p>
+        <p class="text-sm text-gray-500 mt-1">Evidence of problem-solving.</p>
+      </div>
+      <div class="stat-card p-5">
+        <p class="text-sm font-medium text-gray-500">Awards & Recognition</p>
+        <p id="stat-awards" class="text-3xl font-bold mt-1" style="color: var(--supporting-yellow);"></p>
+        <p class="text-sm text-gray-500 mt-1">Formal proof of excellence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Academic Foundation -->
+  <section id="academic-foundation" class="section-content max-w-6xl mx-auto space-y-6">
+    <h2 class="text-3xl font-extrabold text-gray-900 border-b pb-2">Academic Foundation</h2>
+    <p class="text-gray-600">Relevant coursework demonstrates core knowledge and trajectory.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="stat-card p-4 md:col-span-1 flex flex-col items-center">
+        <p class="text-sm font-medium text-gray-500 mb-2">Cumulative GPA</p>
+        <div class="chart-container"><canvas id="gpaDoughnutChart"></canvas></div>
+        <p id="gpa-value" class="text-3xl font-bold mt-4" style="color: var(--primary-color);"></p>
+      </div>
+      <div class="stat-card p-6 md:col-span-2">
+        <h3 class="text-xl font-semibold mb-4 text-gray-800">Relevant Coursework</h3>
+        <div id="coursework-list" class="space-y-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Showcase -->
+  <section id="project-showcase" class="section-content max-w-6xl mx-auto space-y-6">
+    <h2 class="text-3xl font-extrabold text-gray-900 border-b pb-2">Project Outcomes (C-S-R)</h2>
+    <p class="text-gray-600">Shows ability to apply theory and initiative.</p>
+    <div id="project-filters" class="flex flex-wrap gap-3">
+      <button class="btn-filter px-4 py-2 text-sm font-medium rounded-full border border-gray-300 bg-white active" data-filter="all">Show All</button>
+    </div>
+    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
+
+  <!-- Experience & Recognition -->
+  <section id="recognition-experience" class="section-content max-w-6xl mx-auto space-y-6">
+    <h2 class="text-3xl font-extrabold text-gray-900 border-b pb-2">Experience & Recognition</h2>
+    <p class="text-gray-600">Evidence of real-world collaboration, leadership, and recognition.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="stat-card p-6">
+        <h3 class="text-xl font-semibold mb-4 text-gray-800 flex items-center">🤝 Experience & Service</h3>
+        <div id="experience-list" class="space-y-4"></div>
+      </div>
+      <div class="stat-card p-6">
+        <h3 class="text-xl font-semibold mb-4 text-gray-800 flex items-center">🏅 Awards & Recognition</h3>
+        <div id="awards-list" class="space-y-4"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// ------------------ DATA (editable) ------------------
+const profileData = {
+  studentName: "Garrett Shaw",
+  tagline: "Innovative Mind, Results-Oriented",
+  currentYear: "Freshman",
+  major: "Risk Management and Insurance, Finance",
+  gpa: 4.00,
+  photoUrl: "https://www.greenfieldreporter.com/wp-content/uploads/2025/05/134826343_web1_EH-G-Shaw-300x450.jpg",
+  logoUrl: "https://placehold.co/40x40/BA0C2F/FFFFFF.png?text=BSU",
+  personalBio: "I am a freshman passionate about turning innovative ideas into results. I focus on creating user-centered digital experiences and applying data-driven insights to solve real-world challenges.",
+  missionStatement: "My mission is to leverage creativity and strategic thinking to develop innovative solutions that drive measurable results. I aim to transform ideas into actionable outcomes, continuously improving processes and delivering value for every project I take on."
+};
+
+const academicData = [
+  { name: "Principles of Financial Accounting", grade: "A", semester: "Fall 2025", relevance: "Code" },
+  { name: "Business Information Systems", grade: "A", semester: "Fall 2025", relevance: "Design" },
+  { name: "The Entrepreneurial Experience", grade: "A", semester: "Fall 2025", relevance: "Foundational" },
+  { name: "Composing Research", grade: "A", semester: "Fall 2025", relevance: "Code" },
+  { name: "Intro to Theatre", grade: "A", semester: "Fall 2025", relevance: "Code" }
+];
+
+const projectData = [
+  {
+    title: "Local Charity Website Redesign",
+    category: "Design",
+    challenge: "The local Humane Society site was not mobile-friendly, resulting in high bounce rates on the donation page.",
+    solution: "Designed and implemented a responsive, user-centered interface using HTML, Tailwind CSS, and vanilla JS.",
+    result: "Increased mobile conversion rate by **15%** and reduced bounce rate by **22%** in the first month.",
+    link: "https://github.com/riley/charity-site"
+  },
+  {
+    title: "Twitter Sentiment Analyzer (Academic)",
+    category: "Code",
+    challenge: "Required to analyze public sentiment towards a political topic using programming tools for a final project.",
+    solution: "Used Python (Pandas/Matplotlib) to clean data and built a basic Naive Bayes classification model.",
+    result: "Achieved **82%** accuracy in classifying positive/negative tweets, earning the highest grade in the class (A).",
+    link: ""
+  },
+  {
+    title: "Summer Landscaping Project",
+    category: "Service",
+    challenge: "Assisted in maintaining and improving client properties during summer work.",
+    solution: "Operated landscaping tools, coordinated team workflow, and optimized maintenance schedules.",
+    result: "Completed projects **on-time**, improving client satisfaction and property aesthetics.",
+    link: ""
+  },
+  {
+    title: "Data Analysis Project",
+    category: "Code",
+    challenge: "Needed to analyze a dataset for trends in consumer behavior.",
+    solution: "Cleaned and processed data in Excel and Python, used charts to visualize key trends.",
+    result: "Generated actionable insights that highlighted **5 key patterns**, improving decision-making for a class project.",
+    link: ""
+  }
+];
+
+const recognitionData = {
+  experience: [
+    { title: "Team Lead, Ball State Hackathon", type: "Extracurricular", duration: "Oct 2025", detail: "Led a four-person team to develop a functional prototype in **24 hours**." },
+    { title: "Library Volunteer (IT Support)", type: "Community Service", duration: "Jan - May 2025", detail: "Provided **40+ hours** of technical support for public computers and staff devices." },
+    { title: "Landscaping Summer Job", type: "Work Experience", duration: "Summer 2025", detail: "Performed landscaping and property maintenance, contributing to **client satisfaction** and teamwork experience." }
+  ],
+  awards: [
+    { title: "Dean's List", duration: "Fall 2024", detail: "Achieved a **3.8 GPA**." },
+    { title: "Rising Star Freshman Award", duration: "Spring 2025", detail: "Recognized by the CS department for high academic achievement and engagement." }
+  ]
+};
+
+// ------------------ HELPERS ------------------
+function highlightBold(text) {
+  return text.replace(/\*{2}(.*?)\*{2}/g, '<span class="text-project-highlight">$1</span>');
+}
+
+// ------------------ RENDER / UI ------------------
+document.addEventListener('DOMContentLoaded', () => {
+  applyBranding();
+  renderAllContent();
+  setupInteractions();
+  initGpaChart();
+  updateDashboardStats();
+});
+
+function applyBranding() {
+  document.getElementById('nav-name').textContent = profileData.studentName;
+  document.getElementById('nav-title').textContent = profileData.tagline;
+  document.getElementById('nav-school').textContent = document.documentElement.style.getPropertyValue('--school-name');
+  document.title = `Portfolio Snapshot | ${profileData.studentName}`;
+  const logoElement = document.getElementById('nav-logo');
+  logoElement.src = profileData.logoUrl;
+  logoElement.onerror = function() { this.src = 'https://placehold.co/40x40/9CA3AF/FFFFFF.png?text=Logo'; };
+}
+
+function updateDashboardStats() {
+  const numProjects = projectData.length;
+  const numAwards = recognitionData.awards.length;
+  const impactScore = Math.round((numProjects * 3) + (numAwards * 2) + (profileData.gpa * 5));
+  document.getElementById('stat-year').textContent = profileData.currentYear;
+  document.getElementById('stat-major').textContent = profileData.major;
+  document.getElementById('stat-impact').textContent = impactScore;
+  document.getElementById('stat-projects').textContent = numProjects;
+  document.getElementById('stat-awards').textContent = numAwards;
+  document.getElementById('gpa-value').textContent = `${profileData.gpa.toFixed(2)} / 4.0`;
+}
+
+function initGpaChart() {
+  const ctx = document.getElementById('gpaDoughnutChart').getContext('2d');
+  const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Current GPA', 'Remaining'],
+      datasets: [{
+        data: [profileData.gpa, 4.0 - profileData.gpa],
+        backgroundColor: [primaryColor, '#E5E7EB'],
+        borderColor: 'white',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '70%',
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: (ctx) => ctx.label + ': ' + ctx.formattedValue } }
+      }
+    }
+  });
+}
+
+function renderAllContent() {
+  renderIntroduction();
+  renderAcademicContent();
+  renderExperienceContent();
+  renderProjectCards(projectData);
+  renderProjectFilters();
+}
+
+function renderIntroduction() {
+  const container = document.getElementById('introduction-content');
+  container.innerHTML = `
+    <div class="md:col-span-1 flex justify-center md:justify-start">
+      <img src="${profileData.photoUrl}" alt="Professional headshot of ${profileData.studentName}" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4" style="border-color: var(--primary-color);" onerror="this.src='https://placehold.co/150x150/9CA3AF/FFFFFF?text=Photo';">
+    </div>
+    <div class="md:col-span-3 space-y-4">
+      <p class="text-lg font-medium text-gray-800 leading-relaxed">${profileData.personalBio}</p>
+      <div class="p-3 rounded-lg border-l-4" style="border-color: var(--primary-color); background-color: var(--secondary-color);">
+        <p class="font-semibold text-gray-800">My Mission</p>
+        <p class="text-sm text-gray-600 italic">${profileData.missionStatement}</p>
+      </div>
+    </div>
+  `;
+}
+
+function renderAcademicContent() {
+  const listContainer = document.getElementById('coursework-list');
+  listContainer.innerHTML = academicData.map(course => `
+    <div class="flex justify-between items-center text-sm border-b pb-1">
+      <div class="flex-1">
+        <span class="font-medium">${course.name}</span>
+        <div class="text-xs text-gray-500">${course.semester}</div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-semibold px-2 py-0.5 rounded-full text-white" style="background-color: var(--accent-color);">${course.relevance}</span>
+        <span class="text-gray-600">${course.grade}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderExperienceContent() {
+  const expContainer = document.getElementById('experience-list');
+  const awardContainer = document.getElementById('awards-list');
+
+  awardContainer.innerHTML = recognitionData.awards.map(item => `
+    <div class="flex flex-col border-l-4 pl-4" style="border-color: var(--supporting-yellow);">
+      <p class="font-semibold text-gray-800">${item.title}</p>
+      <p class="text-xs text-gray-500">${item.duration}</p>
+      <p class="text-sm mt-1 text-gray-700">${highlightBold(item.detail)}</p>
+    </div>
+  `).join('');
+
+  expContainer.innerHTML = recognitionData.experience.map(item => `
+    <div class="border-l-4 pl-4" style="border-color: var(--primary-color);">
+      <p class="font-semibold text-gray-800">${item.title}</p>
+      <p class="text-xs text-gray-500">${item.type} | ${item.duration}</p>
+      <p class="text-sm mt-1 text-gray-700">${highlightBold(item.detail)}</p>
+    </div>
+  `).join('');
+}
+
+function renderProjectCards(projects) {
+  const gridContainer = document.getElementById('projects-grid');
+  gridContainer.innerHTML = projects.map(project => {
+    const challenge = highlightBold(project.challenge || '');
+    const solution = highlightBold(project.solution || '');
+    const result = highlightBold(project.result || '');
+    const linkHtml = project.link ? `<a href="${project.link}" target="_blank" class="mt-3 inline-flex items-center text-sm font-medium hover:text-blue-800" style="color: var(--supporting-blue);">View Demo / Repo <span>&rarr;</span></a>` : '<p class="mt-3 text-sm text-gray-500">No public link available.</p>';
+
+    return `
+      <div class="stat-card p-5 space-y-3 border-t-4" style="border-color: var(--primary-color);" data-category="${project.category}">
+        <div class="flex justify-between items-center">
+          <h4 class="font-bold text-lg text-gray-900">${project.title}</h4>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full text-white" style="background-color: var(--accent-color);">${project.category}</span>
         </div>
-        <div id="nav-links" class="flex flex-col space-y-2">
-            <a class="nav-link p-3 text-sm active" onclick="scrollToSection('student-introduction')">👤 About Me & Mission</a>
-            <a class="nav-link p-3 text-sm" onclick="scrollToSection('snapshot-dashboard')">🚀 Snapshot & Impact</a>
-            <a class="nav-link p-3 text-sm" onclick="scrollToSection('academic-foundation')">🧠 Academic Foundation</a>
-            <a class="nav-link p-3 text-sm" onclick="scrollToSection('project-showcase')">💡 Project Outcomes</a>
-            <a class="nav-link p-3 text-sm" onclick="scrollToSection('recognition-experience')">🏆 Experience & Recognition</a>
+
+        <div class="space-y-2 text-sm">
+          <p class="font-semibold text-gray-800">Challenge (Context)</p>
+          <p class="text-gray-600 pl-3 border-l-2 border-gray-200">${challenge}</p>
+
+          <p class="font-semibold text-gray-800 pt-2">Solution (Process)</p>
+          <p class="text-gray-600 pl-3 border-l-2 border-gray-200">${solution}</p>
+
+          <p class="font-semibold text-gray-800 pt-2">Result (Outcome)</p>
+          <p class="text-gray-600 pl-3 border-l-2 border-gray-200">${result}</p>
         </div>
-    </nav>
 
-    <main class="main-content flex-grow p-4 md:p-10 lg:p-12 space-y-12 overflow-y-auto">
-        <section id="student-introduction" class="section-content max-w-6xl mx-auto space-y-6">
-            <h2 class="text-3xl font-extrabold text-gray-900 border-b pb-2">Introduction & Personal Mission</h2>
-            <div id="introduction-content" class="stat-card p-6 grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
-                <div class="md:col-span-1 flex justify-center md:justify-start">
-                    <img src="https://www.greenfieldreporter.com/wp-content/uploads/2025/05/134826343_web1_EH-G-Shaw-300x450.jpg" alt="Professional headshot of Garrett Shaw" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4" style="border-color: var(--primary-color);">
-                </div>
-                <div class="md:col-span-3 space-y-4">
-                    <p class="text-lg font-medium text-gray-800 leading-relaxed">I am a freshman passionate about turning innovative ideas into results. I focus on creating user-centered digital experiences and applying data-driven insights to solve real-world challenges.</p>
-                    <div class="p-3 rounded-lg border-l-4" style="border-color: var(--primary-color); background-color: var(--secondary-color);">
-                        <p class="font-semibold text-gray-800">My Mission</p>
-                        <p class="text-sm text-gray-600 italic">My mission is to leverage creativity and strategic thinking to develop innovative solutions that drive measurable results. I aim to transform ideas into actionable outcomes, continuously improving processes and delivering value for every project I take on.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        ${linkHtml}
+      </div>
+    `;
+  }).join('');
+}
 
-        <section id="snapshot-dashboard" class="section-content max-w-6xl mx-auto space-y-6">
-            <h2 class="text-3xl font-extrabold text-gray-900 border-b pb-2">Snapshot & Impact</h2>
-            <p class="text-gray-600">This dashboard provides a quick, data-driven summary of my current status and overall engagement. This is the **Proof** that I'm investing in my career from day one.</p>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="stat-card p-5">
-                    <p class="text-sm font-medium text-gray-500">Current Status</p>
-                    <p id="stat-year" class="text-3xl font-bold mt-1" style="color: var(--primary-color);">Freshman</p>
-                    <p id="stat-major" class="text-sm text-gray-500 mt-1">Risk Management and Insurance, Finance</p>
-                </div>
-                <div class="stat-card p-5">
-                    <p class="text-sm font-medium text-gray-500">Calculated Impact Score</p>
-                    <p id="stat-impact" class="text-3xl font-bold mt-1" style="color: var(--supporting-green);">0</p>
-                    <p class="text-sm text-gray-500 mt-1">Reflects engagement across all key areas.</p>
-                </div>
-                <div class="stat-card p-5">
-                    <p class="text-sm font-medium text-gray-500">Total Projects Documented</p>
-                    <p id="stat-projects" class="text-3xl font-bold mt-1" style="color: var(--supporting-blue);">3</p>
-                    <p class="text-sm text-gray-500 mt-1">Evidence of problem-solving.</p>
-                </div>
-                <div class="stat-card p-5">
-                    <p class="text-sm font-medium text-gray-500">Awards & Recognition</p>
-                    <p id="stat-awards" class="text-3xl font-bold mt-1" style="color: var(--supporting-yellow);">2</p>
-                    <p class="text-sm text-gray-500 mt-1">Formal proof of excellence.</p>
-                </div>
-            </div>
-        </section>
+function renderProjectFilters() {
+  const container = document.getElementById('project-filters');
+  // remove old dynamic buttons (keep the Show All)
+  container.querySelectorAll('.btn-filter.dynamic').forEach(n => n.remove());
 
-        <section id="academic-foundation" class="section-content max-w-6xl mx-auto space-y-6">
-            <h2 class="text-3xl font-extrabold text-gray-900 border-b pb-2">Academic Foundation</h2>
-            <p class="text-gray-600">My coursework demonstrates the core **Foundational Knowledge** and my technical trajectory. The chart below shows my current standing, while the list details the relevant classes taken.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="stat-card p-4 md:col-span-1 flex flex-col items-center">
-                    <p class="text-sm font-medium text-gray-500 mb-2">Cumulative GPA</p>
-                    <div class="chart-container"><canvas id="gpaDoughnutChart"></canvas></div>
-                    <p id="gpa-value" class="text-3xl font-bold mt-4" style="color: var(--primary-color);">4.00 / 4.0</p>
-                </div>
-                <div class="stat-card p-6 md:col-span-2">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Relevant Coursework</h3>
-                    <div id="coursework-list" class="space-y-3">
-                        <div class="flex justify-between items-center text-sm border-b pb-1">
-                            <span class="font-medium">Principles of Financial Accounting</span>
-                            <span class="text-xs font-semibold px-2 py-0.5 rounded-full text-white" style="background-color: var(--accent-color);">Code</span>
-                            <span class="text-gray-600">A (Fall 2025)</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm border-b pb-1">
-                            <span class="font-medium">Business Information Systems</span>
-                            <span class="text-xs font-semibold px-2 py-0.5 rounded-full text-white" style="background-color: var(--accent-color);">Design</span>
-                            <span class="text-gray-600">A (Fall 2025)</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm border-b pb-1">
-                            <span class="font-medium">The Entrepreneurial Experience</span>
-                            <span class="text-xs font-semibold px-2 py-0.5 rounded-full text-white" style="background-color: var(--accent-color);">Foundational</span>
-                            <span class="text-gray-600">A (Fall 2025)</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm border-b pb-1">
-                            <span class="font-medium">Composing Research</span>
-                            <span class="text-xs font-semibold px-2 py-0.5 rounded-full text-white" style="background-color: var(--accent-color);">Code</span>
-                            <span class="text-gray-600">A (Fall 2025)</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm border-b pb-1">
-                            <span class="font-medium">Intro to Theatre</span>
-                            <span class="text-xs font-semibold px-2 py-0.5 rounded-full text-white" style="background-color: var(--accent-color);">Code</span>
-                            <span class="text-gray-600">A (Fall 2025)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  const categories = Array.from(new Set(projectData.map(p => p.category)));
+  categories.forEach(category => {
+    const btn = document.createElement('button');
+    btn.className = 'btn-filter dynamic px-4 py-2 text-sm font-medium rounded-full border border-gray-300 bg-white hover:bg-gray-100 transition';
+    btn.textContent = category;
+    btn.dataset.filter = category;
+    container.appendChild(btn);
+  });
+}
 
-        <section id="project-showcase" class="section-content max-w-6xl mx-auto space-y-6">
-            <h2 class="text-3xl font-extrabold text-gray-900 border-b pb-2">Project Outcomes (C-S-R Format)</h2>
-            <p class="text-gray-600">These projects show my ability to translate theory into practice (Pillar 1) and my personal initiative (Pillar 2). All entries follow the **Challenge, Solution, Result (C-S-R)** framework to focus on measurable outcomes.</p>
-            <div id="project-filters" class="flex flex-wrap gap-3">
-                <button class="btn-filter px-4 py-2 text-sm font-medium rounded-full border border-gray-300 bg-white active" data-filter="all">Show All</button>
-            </div>
-            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Projects rendered by JS -->
-            </div>
-        </section>
+// ------------------ INTERACTIONS ------------------
+function setupInteractions() {
+  // Project filter click
+  document.getElementById('project-filters').addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-filter');
+    if (!btn) return;
+    document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 
-        <section id="recognition-experience" class="section-content max-w-6xl mx-auto space-y-6">
-            <h2 class="text-3xl font-extrabold text-gray-900 border-b pb-2">Experience & Recognition</h2>
-            <p class="text-gray-600">This section provides evidence of **real-world collaboration (Pillar 3)**, leadership, and external recognition, which demonstrate strong soft skills (Pillar 4).</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="stat-card p-6">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800 flex items-center"><span class="text-2xl mr-2">🤝</span> Experience & Service</h3>
-                    <div id="experience-list" class="space-y-4">
-                        <div class="border-l-4 pl-4" style="border-color: var(--primary-color);">
-                            <p class="font-semibold text-gray-800">Team Lead, Ball State Hackathon</p>
-                            <p class="text-xs text-gray-500">Extracurricular | Oct 2025</p>
-                            <p class="text-sm mt-1 text-gray-700">Led a four-person team to develop a functional prototype in **24 hours**.</p>
-                        </div>
-                        <div class="border-l-4 pl-4" style="border-color: var(--primary-color);">
-                            <p class="font-semibold text-gray-800">Library Volunteer (IT Support)</p>
-                            <p class="text-xs text-gray-500">Community Service | Jan - May 2025</p>
-                            <p class="text-sm mt-1 text-gray-700">Provided **40+ hours** of technical support for public computers and staff devices.</p>
-                        </div>
-                        <div class="border-l-4 pl-4" style="border-color: var(--primary-color);">
-                            <p class="font-semibold text-gray-800">Landscaping Assistant</p>
-                            <p class="text-xs text-gray-500">Job | Summer 2025</p>
-                            <p class="text-sm mt-1 text-gray-700">Worked as part of a team maintaining residential and commercial properties, completing **100+ hours** of outdoor labor and learning time management and teamwork skills.</p>
-                        </div>
-                    </div>
-                </div>
+    const filter = btn.dataset.filter;
+    const filtered = filter === 'all' ? projectData : projectData.filter(p => {
+      // Support multi-category strings (e.g., "Code/Personal")
+      return p.category && p.category.split('/').map(s => s.trim()).includes(filter);
+    });
+    renderProjectCards(filtered);
+  });
 
-                <div class="stat-card p-6">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800 flex items-center"><span class="text-2xl mr-2">🏅</span> Awards & Recognition</h3>
-                    <div id="awards-list" class="space-y-4">
-                        <div class="flex flex-col border-l-4 pl-4" style="border-color: var(--supporting-yellow);">
+  // Scroll navigation active state with IntersectionObserver
+  const sections = document.querySelectorAll('.section-content');
+  const observerOptions = { root: null, rootMargin: '0px 0px -50% 0px', threshold: 0 };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const navLink = Array.from(document.querySelectorAll('.nav-link')).find(link => link.getAttribute('onclick')?.includes(id));
+      if (navLink) {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+          navLink.classList.add('active');
+        }
+      }
+    });
+  }, observerOptions);
+  sections.forEach(s => observer.observe(s));
+}
 
+// Smooth scroll helper
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) section.scrollIntoView({ behavior: 'smooth' });
+}
 
+// ------------------ End of script ------------------
+</script>
+</body>
+</html>
