@@ -138,13 +138,13 @@ main strong { font-weight: 700; color: var(--accent-color); }
 </main>
 
 <script>
-// ------------------ DATA (editable) ------------------
+// ------------------ DATA ------------------
 const profileData = {
   studentName: "Garrett Shaw",
   tagline: "Innovative Mind, Results-Oriented",
   currentYear: "Freshman",
   major: "Risk Management and Insurance, Finance",
-  gpa: 4.00,
+  gpa: 4.0,
   photoUrl: "https://www.greenfieldreporter.com/wp-content/uploads/2025/05/134826343_web1_EH-G-Shaw-300x450.jpg",
   logoUrl: "https://placehold.co/40x40/BA0C2F/FFFFFF.png?text=BSU",
   personalBio: "I am a freshman passionate about turning innovative ideas into results. I focus on creating user-centered digital experiences and applying data-driven insights to solve real-world challenges.",
@@ -152,30 +152,14 @@ const profileData = {
 };
 
 const academicData = [
-  { name: "Principles of Financial Accounting", grade: "A", semester: "Fall 2025", relevance: "Code" },
-  { name: "Business Information Systems", grade: "A", semester: "Fall 2025", relevance: "Design" },
-  { name: "The Entrepreneurial Experience", grade: "A", semester: "Fall 2025", relevance: "Foundational" },
-  { name: "Composing Research", grade: "A", semester: "Fall 2025", relevance: "Code" },
-  { name: "Intro to Theatre", grade: "A", semester: "Fall 2025", relevance: "Code" }
+  { name: "Principles of Financial Accounting", grade: "A", semester: "Fall 2025" },
+  { name: "Business Information Systems", grade: "A", semester: "Fall 2025" },
+  { name: "The Entrepreneurial Experience", grade: "A", semester: "Fall 2025" },
+  { name: "Composing Research", grade: "A", semester: "Fall 2025" },
+  { name: "Intro to Theatre", grade: "A", semester: "Fall 2025" }
 ];
 
 const projectData = [
-  {
-    title: "Local Charity Website Redesign",
-    category: "Design",
-    challenge: "The local Humane Society site was not mobile-friendly, resulting in high bounce rates on the donation page.",
-    solution: "Designed and implemented a responsive, user-centered interface using HTML, Tailwind CSS, and vanilla JS.",
-    result: "Increased mobile conversion rate by **15%** and reduced bounce rate by **22%** in the first month.",
-    link: "https://github.com/riley/charity-site"
-  },
-  {
-    title: "Twitter Sentiment Analyzer (Academic)",
-    category: "Code",
-    challenge: "Required to analyze public sentiment towards a political topic using programming tools for a final project.",
-    solution: "Used Python (Pandas/Matplotlib) to clean data and built a basic Naive Bayes classification model.",
-    result: "Achieved **82%** accuracy in classifying positive/negative tweets, earning the highest grade in the class (A).",
-    link: ""
-  },
   {
     title: "Summer Landscaping Project",
     category: "Service",
@@ -185,24 +169,31 @@ const projectData = [
     link: ""
   },
   {
-    title: "Data Analysis Project",
+    title: "School Flyer Design",
+    category: "Design",
+    challenge: "Needed to promote a student event with limited budget.",
+    solution: "Designed flyers using Canva and distributed them online and around campus.",
+    result: "Event attendance increased by **25%**.",
+    link: ""
+  },
+  {
+    title: "Personal Budget Tracker",
     category: "Code",
-    challenge: "Needed to analyze a dataset for trends in consumer behavior.",
-    solution: "Cleaned and processed data in Excel and Python, used charts to visualize key trends.",
-    result: "Generated actionable insights that highlighted **5 key patterns**, improving decision-making for a class project.",
+    challenge: "Wanted to practice finance skills and track spending habits.",
+    solution: "Built an Excel sheet with formulas to track income and expenses.",
+    result: "Improved personal savings and presented findings to a finance class project.",
     link: ""
   }
 ];
 
 const recognitionData = {
   experience: [
-    { title: "Team Lead, Ball State Hackathon", type: "Extracurricular", duration: "Oct 2025", detail: "Led a four-person team to develop a functional prototype in **24 hours**." },
-    { title: "Library Volunteer (IT Support)", type: "Community Service", duration: "Jan - May 2025", detail: "Provided **40+ hours** of technical support for public computers and staff devices." },
-    { title: "Landscaping Summer Job", type: "Work Experience", duration: "Summer 2025", detail: "Performed landscaping and property maintenance, contributing to **client satisfaction** and teamwork experience." }
+    { title: "Landscaping Summer Job", type: "Work Experience", duration: "Summer 2025", detail: "Performed landscaping and property maintenance, contributing to **client satisfaction** and teamwork experience." },
+    { title: "Tree Farm Summer Job", type: "Work Experience", duration: "Summer 2025", detail: "Assisted with planting, maintenance, and harvesting operations at a local tree farm." }
   ],
   awards: [
-    { title: "Dean's List", duration: "Fall 2024", detail: "Achieved a **3.8 GPA**." },
-    { title: "Rising Star Freshman Award", duration: "Spring 2025", detail: "Recognized by the CS department for high academic achievement and engagement." }
+    { title: "Ball State Presidential Scholarship", duration: "2025", detail: "Awarded for academic achievement and leadership potential." },
+    { title: "SigEp Balanced Man Scholarship", duration: "2025", detail: "Recognized for excellence in academics, leadership, and community involvement." }
   ]
 };
 
@@ -239,7 +230,7 @@ function updateDashboardStats() {
   document.getElementById('stat-impact').textContent = impactScore;
   document.getElementById('stat-projects').textContent = numProjects;
   document.getElementById('stat-awards').textContent = numAwards;
-  document.getElementById('gpa-value').textContent = `${profileData.gpa.toFixed(2)} / 4.0`;
+  document.getElementById('gpa-value').textContent = `${profileData.gpa.toFixed(1)} / 4.0`;
 }
 
 function initGpaChart() {
@@ -301,7 +292,6 @@ function renderAcademicContent() {
         <div class="text-xs text-gray-500">${course.semester}</div>
       </div>
       <div class="flex items-center gap-3">
-        <span class="text-xs font-semibold px-2 py-0.5 rounded-full text-white" style="background-color: var(--accent-color);">${course.relevance}</span>
         <span class="text-gray-600">${course.grade}</span>
       </div>
     </div>
@@ -343,18 +333,14 @@ function renderProjectCards(projects) {
           <h4 class="font-bold text-lg text-gray-900">${project.title}</h4>
           <span class="text-xs font-semibold px-3 py-1 rounded-full text-white" style="background-color: var(--accent-color);">${project.category}</span>
         </div>
-
         <div class="space-y-2 text-sm">
           <p class="font-semibold text-gray-800">Challenge (Context)</p>
           <p class="text-gray-600 pl-3 border-l-2 border-gray-200">${challenge}</p>
-
           <p class="font-semibold text-gray-800 pt-2">Solution (Process)</p>
           <p class="text-gray-600 pl-3 border-l-2 border-gray-200">${solution}</p>
-
           <p class="font-semibold text-gray-800 pt-2">Result (Outcome)</p>
           <p class="text-gray-600 pl-3 border-l-2 border-gray-200">${result}</p>
         </div>
-
         ${linkHtml}
       </div>
     `;
@@ -363,9 +349,7 @@ function renderProjectCards(projects) {
 
 function renderProjectFilters() {
   const container = document.getElementById('project-filters');
-  // remove old dynamic buttons (keep the Show All)
   container.querySelectorAll('.btn-filter.dynamic').forEach(n => n.remove());
-
   const categories = Array.from(new Set(projectData.map(p => p.category)));
   categories.forEach(category => {
     const btn = document.createElement('button');
@@ -378,22 +362,16 @@ function renderProjectFilters() {
 
 // ------------------ INTERACTIONS ------------------
 function setupInteractions() {
-  // Project filter click
   document.getElementById('project-filters').addEventListener('click', (e) => {
     const btn = e.target.closest('.btn-filter');
     if (!btn) return;
     document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-
     const filter = btn.dataset.filter;
-    const filtered = filter === 'all' ? projectData : projectData.filter(p => {
-      // Support multi-category strings (e.g., "Code/Personal")
-      return p.category && p.category.split('/').map(s => s.trim()).includes(filter);
-    });
+    const filtered = filter === 'all' ? projectData : projectData.filter(p => p.category === filter);
     renderProjectCards(filtered);
   });
 
-  // Scroll navigation active state with IntersectionObserver
   const sections = document.querySelectorAll('.section-content');
   const observerOptions = { root: null, rootMargin: '0px 0px -50% 0px', threshold: 0 };
   const observer = new IntersectionObserver((entries) => {
@@ -411,13 +389,10 @@ function setupInteractions() {
   sections.forEach(s => observer.observe(s));
 }
 
-// Smooth scroll helper
 function scrollToSection(sectionId) {
   const section = document.getElementById(sectionId);
   if (section) section.scrollIntoView({ behavior: 'smooth' });
 }
-
-// ------------------ End of script ------------------
 </script>
 </body>
 </html>
